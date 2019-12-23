@@ -1,9 +1,7 @@
 # FLASK
 from flask import Flask,request, render_template_string
 from core.engine import PageReader
-import sys
-import codecs
-import json
+import sys, os, codecs, json
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -20,6 +18,17 @@ def json_summary():
     json = reader.dump_json
 
     return json
+
+@app.route("/admin")
+def admin_page ():
+    html = '''
+    <div style="display: flex;justify-content: center;align-items: center;height: 100%;width: 100%;">
+        <div style="display: flex; align-items: center;justify-content: center;">
+            <h1 style="font-size: 50px;">Heroku working fine! :)</h1>
+        </div>
+    </div>
+    '''
+    return render_template_string(html)
 
 @app.route("/page_html")
 def html_summary ():
