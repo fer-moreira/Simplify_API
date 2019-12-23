@@ -108,7 +108,7 @@ class PageReader (object):
             else: pass
 
         full_json = {
-            'status_code' : '200'
+            'status_code' : '200',
             'origin'      : str(self.url),
             'title'       : title,
             'pre_title'   : pre_title,
