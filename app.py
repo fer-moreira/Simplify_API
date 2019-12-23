@@ -1,8 +1,11 @@
 # FLASK
 from flask import Flask,request, render_template_string
 from core.engine import PageReader
-import sys, os, codecs, json
+import sys, os, codecs
+import json as jsonparse
 from flask_cors import CORS, cross_origin
+
+from requests.exceptions import SSLError
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -10,14 +13,19 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/get_article",methods=['GET','POST'])
 def json_summary():
-    headers = request.headers
-    _url = headers['article-url']
+    try:
+        headers = request.headers
+        _url = headers['article-url']
 
-    reader = PageReader()
-    reader.url = _url
-    json = reader.dump_json
+        reader = PageReader()
+        reader.url = _url
+        json = reader.dump_json
 
-    return json
+        return json
+    except SSLError:
+        return jsonparse.dumps({"error":{"code":"404","text":"url not found"}})
+    except:
+        return jsonparse.dumps({"error":{'code':'?','text':'unknow error'}})
 
 @app.route("/admin")
 def admin_page ():
@@ -33,7 +41,7 @@ def admin_page ():
 @app.route("/page_html")
 def html_summary ():
     reader = PageReader()
-    reader.url = "https://www.nytimes.com/2019/12/23/world/europe/russia-putin.html"
+    reader.url = "https://www.nmes.com/2019/12/23asd/woasdrld/europe/russia1-putin.html"
     html = reader.dump_html
 
     pattern = ''' 

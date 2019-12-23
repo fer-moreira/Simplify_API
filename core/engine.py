@@ -1,6 +1,7 @@
 # utf-8
 
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse
 import requests
 from requests.exceptions import ConnectionError
 import codecs
@@ -29,49 +30,72 @@ class PageReader (object):
     def url (self,value):
         self._url = value
 
+
+    def get_meta (self,soup,property,param):
+        if soup.find("meta",property=property):
+            element = soup.find("meta", property=property)
+            return element[param]
+        else:
+            return ""
+
+    def get_keywords (self,soup,property):
+        if soup.find_all("meta",property=property):
+            element = soup.find_all("meta", property=property)
+            return element
+        else:
+            return []
+
+
+    @property
+    def url_domain (self):
+        try: return urlparse(self.url).netloc
+        except: return ""
+
+    def get_favico (self):
+        try:
+            domain = self.url_domain
+            favico_uri = "https://{0}/favicon.ico".format(domain)
+            return favico_uri
+        except:
+            return ""
+            
+
+
     @property
     def dump_json (self):
         page = self.scrap_soup
         article = page.find('article')
 
-        title           = page.find("meta", property="og:title")['content']
-        pre_title       = page.find("meta", property="og:description")['content']
-        post_image      = page.find("meta", property="og:image")['content'] if page.find("meta", property="og:image") else ''
-        post_image_alt  = page.find("meta", property="og:image:alt")['content'] if page.find("meta", property="og:image:alt") else ""
-        site_origin     = page.find("meta", property="og:site_name")['content'] if page.find("meta", property="og:site_name") else ''
-        _keys           = page.find_all("meta",property="article:tag")
-        temp_favico     = page.find("link", rel="shortcut icon")['href']
-        site_image      = ''
+        title           = self.get_meta(page,"og:title","content")
+        pre_title       = self.get_meta(page, "og:description", 'content')
+        post_image      = self.get_meta(page, "og:image", 'content')
+        post_image_alt  = self.get_meta(page, "og:image:alt", 'content')
+        temp_origin     = self.get_meta(page, "og:site_name", 'content')
+        site_origin     = temp_origin if not temp_origin == "" else self.url_domain 
+        _keys           = self.get_keywords(page, "article:tag")
+        site_image      = self.get_favico()
         keywords        = []
-        
-        # ========= FUNCTION TO GET THE FAVICON URL RIGHT =====================
-        if not 'http' in temp_favico and not '.com' in temp_favico:
-            domain = str(self.url).split("//")[1].split("/")[0]
-            site_image = "http://{d}{fav}".format(d=domain,fav=temp_favico)
-        elif '.com' in temp_favico:
-            if temp_favico[:2] == '//':
-                site_image = "http://" + temp_favico[2:]
-            elif temp_favico[0] == '/':
-                site_image = "http://" + temp_favico[1:]
-        else:
-            site_image = temp_favico
-        # ======================================================================
+    
 
-        for k in _keys:
-            key_content = str(k['content']).split(',')
-            keywords = keywords + key_content
+        if _keys:
+            for k in _keys:
+                key_content = str(k['content']).split(',')
+                keywords = keywords + key_content
 
         raw_paragraphs_by_source = page.findAll('p')
         raw_paragraphs_by_article = article.findAll('p')
 
-        if len(raw_paragraphs_by_source) > len(raw_paragraphs_by_article):  raw_paragraphs = raw_paragraphs_by_source
-        else: raw_paragraphs = raw_paragraphs_by_article
+        # if len(raw_paragraphs_by_source) > len(raw_paragraphs_by_article):  
+        #     raw_paragraphs = raw_paragraphs_by_source
+        # else: 
+        raw_paragraphs = raw_paragraphs_by_article
 
         paragraphs_config = []
 
         for p in raw_paragraphs:
-            if not p.text in ['Advertisement','Supported by']:
-                if p.find('a'): _link = str(p.find('a')['href'])
+            if not p.text in ['Advertisement','Supported by', 'Publicidade']:
+                if p.find('a') and p.find('a')['href']: 
+                    _link = str(p.find('a')['href'])
                 else: _link = ''
                 
                 p_json = {
@@ -82,7 +106,6 @@ class PageReader (object):
                 }
                 paragraphs_config.append(p_json)
             else: pass
-
 
         full_json = {
             'origin'      : str(self.url),
@@ -137,8 +160,7 @@ class PageReader (object):
 
         html_text = '''
         <img src="{favico}">
-        <h3>{site}</h3>
-        <h1>{origin}</h1>
+        <h3>{origin}</h3>
         <h1>{title}</h1>
         <h2>{ptitle}</h2>
         <img src="{full}">
@@ -148,7 +170,6 @@ class PageReader (object):
             origin=origin,
             title=title,
             ptitle=pretitle,
-            site=origin,
             favico=origin_img,
             full=title_img,
             keywords=keywords,
