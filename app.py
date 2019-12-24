@@ -25,7 +25,7 @@ def json_summary():
     except SSLError:
         return jsonparse.dumps({"error":{"code":404,"text":"Not Found"}})
     except Exception as r:
-        return jsonparse.dumps({"error":{'code':204,'text':'Unknow error'}})
+        return jsonparse.dumps({"error":{'code':204,'text':str(r)}})
 
 
 @app.route("/get_html")

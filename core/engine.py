@@ -4,10 +4,11 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import requests
 from requests.exceptions import ConnectionError
-import codecs
-import sys
-import bs4
-import json
+
+import codecs, sys, bs4, json
+
+from PIL import Image
+from io import BytesIO,StringIO
 
 class PageReader (object):
     def __init__ (self):
@@ -71,8 +72,26 @@ class PageReader (object):
         p_index = 0
         for paragraph in article_paragraphs:
             if paragraph.find("img"):
-                img = paragraph.find('img')['src']
-                article_body.append({'content':img,'is_img':True})
+                img_uri = paragraph.find('img')['src']
+                
+                try:
+                    req = requests.get(img_uri)
+                    info = Image.open(BytesIO(req.content))
+                    size = info.size
+                    info.close()
+                    img_size = size
+                except:
+                    img_size = [0,0]
+
+                if (img_size[0] + img_size[1]) > 100:
+                    article_body.append({
+                        'content':img_uri,
+                        'is_img':True,
+                        'resolution':{
+                                'width':img_size[0],
+                                'height':img_size[1]
+                    }})
+                else: pass
             else:
                 if not paragraph.text in ['Advertisement','Supported by']:
                     if p_index == 0:
