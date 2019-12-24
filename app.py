@@ -1,5 +1,5 @@
 # FLASK
-from flask import Flask,request, render_template_string
+from flask import Flask,request, render_template_string,render_template
 from core.engine import PageReader
 import sys, os, codecs
 import json as jsonparse
@@ -7,7 +7,7 @@ from flask_cors import CORS, cross_origin
 
 from requests.exceptions import SSLError
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='template')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -23,11 +23,25 @@ def json_summary():
 
         return json
     except SSLError:
-        return jsonparse.dumps({"error":{"code":"404","text":"url not found"}})
-    except:
-        return jsonparse.dumps({"error":{'code':'?','text':'unknow error'}})
+        return jsonparse.dumps({"error":{"code":404,"text":"Not Found"}})
+    except Exception as r:
+        return jsonparse.dumps({"error":{'code':204,'text':'Unknow error'}})
 
-@app.route("/admin")
+
+@app.route("/get_html")
+def html_summary ():
+    url = request.args.get('target')
+
+    reader = PageReader()
+    reader.url = url
+    json = reader.dump_json
+    py_json = jsonparse.loads(json)
+    
+
+    return render_template("dump.html",article=py_json)
+
+
+@app.route("/")
 def admin_page ():
     html = '''
     <div style="display: flex;justify-content: center;align-items: center;height: 100%;width: 100%;">
@@ -38,18 +52,7 @@ def admin_page ():
     '''
     return render_template_string(html)
 
-@app.route("/page_html")
-def html_summary ():
-    reader = PageReader()
-    reader.url = "https://www.nmes.com/2019/12/23asd/woasdrld/europe/russia1-putin.html"
-    html = reader.dump_html
-
-    pattern = ''' 
-    <div style="display: flex; align-items: center; justify-content: center;"><div style="width: 40%;display: flex;flex-direction: column; align-items: center; justify-content: center;">{0}</div></div>
-    '''.format(str(html))
-
-    return render_template_string(pattern)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
