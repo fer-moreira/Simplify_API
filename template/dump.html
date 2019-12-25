@@ -9,44 +9,135 @@ margin: 0px;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body style="height: 100%; width: 100%; padding: 0px; margin: 0px;">
-    <div class="main" style="
+
+
+    <style>
+        * {
+            padding: 0px; 
+            margin: 0px;
+        }
+
+        body {
             height: 100%;
             width: 100%;
-    ">
-        <div class="article" style="
-            padding: 50px;
-        ">
-            <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;padding: 20px;">
-                <img src="{{ article.site_favicon }}" height="64" width="64">
-                <h3 style="text-decoration: underline;">by {{ article.site_name }}</h3>
-            </div>
-            <div style="display: flex;flex-direction: column; widows: 100%; height: 100%;">
-                <div style="justify-content: center;align-items: center;display: flex;flex-direction: column;">
-                    <h1>{{ article.article_title }}</h1>
-                    <h1>{{ article.article_description }}</h1>
-                </div>
-                <div>
-                    <img src="{{ article.article_image }}" alt="">
-                    <h3>{{ article.keywords }}</h3>
-                </div>
-                <div>
-                    {% for p in article.article_body %}
-                        {% if p.is_img %}
-                            <img src="{{ p.content }}" alt="">
-                        {% else %}
-                            {% if loop.index == 1 %}
-                                <p style="margin: 0px !important;"><h1>{{article.article_capitalize}}</h1>{{ p.content }}</p>
-                            {% else %}
-                                <p>{{ p.content }}</p>
-                            {% endif %}
-                            
-                        {% endif %}
-                    {% endfor %}
+        }
+        
+
+        .main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 70%;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 35px;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .header h2 {
+            font-weight: lighter;
+            font-size: 25px;
+        }
+
+        .article {
+            display: flex;
+            flex-direction: column; 
+            width: 100%; 
+            height: 100%;
+        }
+
+        .keyword {
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .paragraph {
+            margin-top: 40px;
+        }
+
+        .paragraph p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-transform: capitalize;
+        }
+
+    </style>
+</head>
+<body>
+
+    {% if article.error %}
+        <div class="main">
+            <div class="container">
+                <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100%;width: 100%;">
+                    <h1 style="font-size: 100px;">{{ article.error.code }}</h1>
+                    <h1>{{ article.error.text }}</h1>
                 </div>
             </div>
         </div>
-    </div>    
+    {% else %}
+        <div class="main">
+            <div class="container">
+                <div class="info">
+                    <img src="{{ article.site_favicon }}" height="64" width="64">
+                    <h3 style="text-decoration: underline;">by {{ article.site_name }}</h3>
+                </div>
+                <div class="article">
+                    <div class="header">
+                        <h1>{{ article.article_title }}</h1>
+                        <h2>{{ article.article_description }}</h2>
+                    </div>
+                    <div class="keywords">
+                        <img src="{{ article.article_image }}" width="100%" alt="">
+                        <h3 class="keyword">{{ article.keywords }}</h3>
+                    </div>
+                    <div class="paragraph">
+                        {% for p in article.article_body %}
+                            {% if p.is_img %}
+                                <img src="{{ p.content }}" width="100%" alt="">
+                            {% else %}
+                                {% if loop.index == 1 %}
+                                    <div>
+                                        <h1 style="float: left; font-size: 50px;">{{article.article_capitalize}}</h1>
+                                        {{ p.content }}
+                                    </div>
+                                {% else %}
+                                    <p>{{ p.content }}</p>
+                                {% endif %}
+                                
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 </body>
 </html>

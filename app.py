@@ -5,44 +5,46 @@ import sys, os, codecs
 import json as jsonparse
 from flask_cors import CORS, cross_origin
 
-from requests.exceptions import SSLError
+from requests.exceptions import SSLError, ConnectionError, MissingSchema
 
 app = Flask(__name__,template_folder='template')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route("/get_article",methods=['GET','POST'])
-def json_summary():
-    try:
-        headers = request.headers
-        _url = headers['article-url']
 
+
+def try_GetArticleData (_url):
+    try:
         reader = PageReader()
         reader.url = _url
         json = reader.dump_json
-
-        return json
     except SSLError:
-        return jsonparse.dumps({"error":{"code":404,"text":"Not Found"}})
-    except Exception:
-        raise
-        # return jsonparse.dumps({"error":{'code':203,'text':'Something in article is missing'}})
+        json = jsonparse.dumps({"error":{"code":400,"text":"Article not found"}})
+    except AttributeError:
+        json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
+    except ConnectionError:
+        json = jsonparse.dumps({"error":{'code':404,'text':'Failted to make connection, URL not exists'}})
+    except MissingSchema:
+        json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
+    except:
+        json = jsonparse.dumps({"error":{'code':505,'text':'Unknow Error'}})
 
-    # finally:
-    #     return jsonparse.dumps({"error":{'code':204,'text':'Unknow Error'}})
+    return json
+
+@app.route("/get_article",methods=['GET','POST'])
+def json_summary():
+    headers = request.headers
+    _url = headers['article-url']
+    json = try_GetArticleData(_url)
+    return json
 
 
 @app.route("/get_html")
 def html_summary ():
     url = request.args.get('target')
+    json = try_GetArticleData(url)
 
-    reader = PageReader()
-    reader.url = url
-    json = reader.dump_json
-    py_json = jsonparse.loads(json)
-    
-
-    return render_template("dump.html",article=py_json)
+    return render_template("dump.html",article=jsonparse.loads(json))
 
 
 @app.route("/")
