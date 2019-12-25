@@ -18,16 +18,12 @@ def try_GetArticleData (_url):
         reader = PageReader()
         reader.url = _url
         json = reader.dump_json
-    except SSLError:
-        json = jsonparse.dumps({"error":{"code":400,"text":"Article not found"}})
-    except AttributeError:
-        json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
-    except ConnectionError:
-        json = jsonparse.dumps({"error":{'code':404,'text':'Failted to make connection, URL not exists'}})
-    except MissingSchema:
-        json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
-    except:
-        json = jsonparse.dumps({"error":{'code':505,'text':'Unknow Error'}})
+
+    except SSLError: json = jsonparse.dumps(       {"error":{"code":400,"text":"Article not found"}})
+    except AttributeError:  json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
+    except ConnectionError: json = jsonparse.dumps({"error":{'code':404,'text':'Failed to make connection, URL not exists'}})
+    except MissingSchema:   json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
+    except:                 json = jsonparse.dumps({"error":{'code':505,'text':'Unknow Error'}})
 
     return json
 
