@@ -72,7 +72,8 @@ class PageReader (object):
         p_index = 0
         for paragraph in article_paragraphs:
             if paragraph.find("img"):
-                img_uri = paragraph.find('img')['src']
+                try: img_uri = paragraph.find('img')['src']
+                except KeyError: pass
                 
                 try:
                     req = requests.get(img_uri)
