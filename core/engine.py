@@ -41,9 +41,16 @@ class PageReader (object):
 
     def get_keywords (self,soup,property):
         try:
+            keywords = []
             if soup.find_all("meta",property=property):
                 elements = soup.find_all("meta", property=property)
-                return [e['content'] for e in elements]
+
+                for e in elements:
+                    keyvalue = e['content']
+                    keys = str(keyvalue).split(',')
+                    keywords += keys
+
+                return keywords
             else:
                 return []
         except TypeError:
