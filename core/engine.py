@@ -102,8 +102,10 @@ class PageReader (object):
                 else: pass
             else:
                 if not paragraph.text in ['Advertisement','Supported by']:
-                    if p_index == 0:
-                        capitalized_char = str(paragraph.text)[0]
+                    if p_index == 0 and paragraph.text:
+                        if len(str(paragraph.text)) > 0:
+                            capitalized_char = str(paragraph.text)[0]
+                        
                         article_body.append({'content':paragraph.text[1:],'is_img':False})
                     else:
                         article_body.append({'content':paragraph.text,'is_img':False})

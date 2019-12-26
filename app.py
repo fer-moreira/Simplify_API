@@ -23,7 +23,9 @@ def try_GetArticleData (_url):
     except AttributeError:  json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
     except ConnectionError: json = jsonparse.dumps({"error":{'code':404,'text':'Failed to make connection, URL not exists'}})
     except MissingSchema:   json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
-    except:                 json = jsonparse.dumps({"error":{'code':505,'text':'Unknow Error'}})
+    except Exception as r:  
+        json = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
+        # raise
 
     return json
 
