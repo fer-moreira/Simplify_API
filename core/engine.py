@@ -62,11 +62,20 @@ class PageReader (object):
         try: return urlparse(self.url).netloc
         except: return ""
 
+    def url_is_alive (self,url):
+        try:
+            req = requests.get(url)
+            return True if (req.status_code == 200) else False
+        except:
+            return False
+
     def get_favico (self):
         try:
             domain = self.url_domain
-            favico_uri = "https://{0}/apple-touch-icon.png".format(domain)
-            return favico_uri
+            high_res_favico = "https://{0}/apple-touch-icon.png".format(domain)
+            low_res_favico = "https://{0}/favicon.ico".format(domain)
+
+            return (high_res_favico if self.url_is_alive(high_res_favico) else low_res_favico)
         except:
             return ""
             
