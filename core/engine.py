@@ -62,12 +62,16 @@ class PageReader (object):
         try: return urlparse(self.url).netloc
         except: return ""
 
-    def url_is_alive (self,url):
+    def try_request (self, url):
         try:
-            req = requests.get(url)
-            return True if (req.status_code == 200) else False
+            req = requests.get(url, timeout=2)
+            code = req.status_code
+            req.close()
+            return code
         except:
-            return False
+            return 404
+
+
 
     def get_favico (self):
         try:
@@ -75,9 +79,18 @@ class PageReader (object):
             high_res_favico = "https://{0}/apple-touch-icon.png".format(domain)
             low_res_favico = "https://{0}/favicon.ico".format(domain)
 
-            return (high_res_favico if self.url_is_alive(high_res_favico) else low_res_favico)
+
+            if self.try_request(high_res_favico) == 200:
+                favico_uri = high_res_favico
+            elif self.try_request(low_res_favico) == 200:
+                favico_uri = low_res_favico
+            else:
+                favico_uri = self.page.find("link", rel="shortcut icon")['href']
+
+            return favico_uri
         except:
-            return ""
+            return self.page.find("link", rel="shortcut icon")['href']
+
             
 
     # THIS FUNCTION PARSE THE ARTICLE FROM HTML TO A PYTHON DICT
@@ -124,25 +137,25 @@ class PageReader (object):
 
     @property
     def dump_json (self):
-        page = self.scrap_soup
-        article = page.find('article')
+        self.page = self.scrap_soup
+        article = self.page.find('article')
 
         
-        temp_origin     = self.get_meta(page, "og:site_name", 'content')
+        temp_origin     = self.get_meta(self.page, "og:site_name", 'content')
         site_name       = temp_origin if not temp_origin == "" else self.url_domain 
 
         article_data = self.get_body(article)
             
         full_json = {
             'code' : 200,
-            'article_title'       : self.get_meta(page,"og:title","content"),
-            'article_description' : self.get_meta(page, "og:description", 'content'),
-            'article_image'       : self.get_meta(page, "og:image", 'content'),
+            'article_title'       : self.get_meta(self.page,"og:title","content"),
+            'article_description' : self.get_meta(self.page, "og:description", 'content'),
+            'article_image'       : self.get_meta(self.page, "og:image", 'content'),
             'article_capitalize'  : article_data.pop('capital', ''),
             'article_body'        : article_data.pop('data',''),
             'site_name'           : site_name,
             'site_favicon'        : self.get_favico(),
-            'keywords'            : self.get_keywords(page, "article:tag"),
+            'keywords'            : self.get_keywords(self.page, "article:tag"),
             'original_post'       : str(self.url),
         }
 
