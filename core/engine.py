@@ -64,7 +64,7 @@ class PageReader (object):
 
     def try_request (self, url):
         try:
-            req = requests.get(url, timeout=2)
+            req = requests.get(url, timeout=4)
             code = req.status_code
             req.close()
             return code
@@ -89,7 +89,8 @@ class PageReader (object):
 
             return favico_uri
         except:
-            return self.page.find("link", rel="shortcut icon")['href']
+            favico_uri = self.page.find("link", rel="shortcut icon")['href']          
+            return favico_uri if self.url_domain in favico_uri else "{0}{1}".format(self.url_domain,favico_uri)
 
             
 
