@@ -1,6 +1,6 @@
 # FLASK
 from flask import Flask,request, render_template_string,render_template
-from core.engine import PageReader
+from core.parser import PageParser
 import sys, os, codecs
 import json as jsonparse
 from flask_cors import CORS, cross_origin
@@ -13,36 +13,38 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 
-def try_GetArticleData (_url):
+def try_get_article (url):
+    """Try requests selected url and dump its content in json
+
+    Parameters:
+    url (string): Selected URL
+
+    Returns:
+    json: Scraped page as json
+
+   """
     try:
-        reader = PageReader()
-        reader.url = _url
+        reader = PageParser()
+        reader.url = url
         json = reader.dump_json
 
-    except SSLError: json = jsonparse.dumps(       {"error":{"code":400,"text":"Article not found"}})
+    except SSLError:        json = jsonparse.dumps({"error":{"code":400,"text":"Article not found"}})
     except AttributeError:  json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
     except ConnectionError: json = jsonparse.dumps({"error":{'code':404,'text':'Failed to make connection, URL not exists'}})
     except MissingSchema:   json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
-    except Exception as r:  
-        json = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
-        # raise
+    except TypeError:       json = jsonparse.dumps({"error":{'code':404,'text':'Misspell URL'}})
+    except Exception as r:  json = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
 
     return json
 
 @app.route("/get_article",methods=['GET','POST'])
 def json_summary():
-    headers = request.headers
-    _url = headers['article-url']
-    json = try_GetArticleData(_url)
-    return json
-
-
-@app.route("/get_html")
-def html_summary ():
-    url = request.args.get('target')
-    json = try_GetArticleData(url)
-
-    return render_template("dump.html",article=jsonparse.loads(json))
+    try:
+        headers = request.headers
+        _url = headers['article-url']
+        json = try_get_article(_url)
+        return json
+    except KeyError as r: return jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
 
 
 @app.route("/")
@@ -50,7 +52,9 @@ def admin_page ():
     html = '''
     <div style="display: flex;justify-content: center;align-items: center;height: 100%;width: 100%;">
         <div style="display: flex; align-items: center;justify-content: center;">
-            <h1 style="font-size: 50px;">Heroku working fine! :)</h1>
+            <h1 style="font-size: 50px;">
+            Simplify is working fine! :)
+            </h1>
         </div>
     </div>
     '''

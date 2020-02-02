@@ -1,0 +1,52 @@
+{
+    "code": 200,
+    "article_title": "Focos de queimadas na Amazônia crescem 30% em 2019",
+    "article_description": "Inpe registrou 89.178 incêndios na floresta, maior número desde 2017; agosto, pior mês do ano, teve mais de 30 mil focos ativos de fogo",
+    "article_image": "https://ogimg.infoglobo.com.br/in/23920147-251-1b7/FT1086A/652/amazonia.jpg",
+    "article_capitalize": "R",
+    "article_body": [
+        {
+            "content": "IO — O número de focos de fogo na Amazônia cresceu 30% em 2019 em relação ao ano anterior, segundo dados compilados pelo Instituto Nacional de Pesquisas Espaciais (Inpe). Ao todo, foram 89.178 incêndios detectados pelo satélite de 1º de janeiro a 31 de dezembro do ano passado. É o maior número desde 2017, que registrou 107.439 focos.",
+            "is_img": false,
+            "props" : [
+                {
+                    "start": 27,
+                    "steps": 4,
+                    "type": "strong",
+                    "content": "fogo"
+                },
+                {
+                    "start": 165,
+                    "steps": 4,
+                    "type": "link",
+                    "content": "Inpe",
+                    "href": "https://oglobo.globo.com/sociedade/ciencia/meio-ambiente/fala-de-salles-pode-ser-sinal-verde-para-desmatadores-diz-ex-diretor-do-inpe-24088939"
+                }
+            ]
+        },
+        {
+            "content": "https://d37iydjzbdkvr9.cloudfront.net/arquivos/2020/01/08/incendios-amazonia-desk.png",
+            "is_img": true,
+            "resolution": {
+                "width": 1240,
+                "height": 2036
+            }
+        },
+    ],
+    "site_name": "O Globo",
+    "site_favicon": "https://oglobo.globo.com/apple-touch-icon.png",
+    "keywords": [
+        "Sociedade",
+        "queimadas;amazonia",
+        "fogo",
+        "Amazonia",
+        "Instituto Nacional de Pesquisas Espaciais",
+        "Inpe",
+        "Emmanuel Macron",
+        "dia do fogo",
+        "Ricardo Salles",
+        "Bolsonaro",
+        "Mourao"
+    ],
+    "original_post": "https://oglobo.globo.com/sociedade/focos-de-queimadas-na-amazonia-crescem-30-em-2019-1-24176803"
+}

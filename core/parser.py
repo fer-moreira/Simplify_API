@@ -10,7 +10,7 @@ import codecs, sys, bs4, json
 from PIL import Image
 from io import BytesIO,StringIO
 
-class PageReader (object):
+class PageParser (object):
     def __init__ (self):
         self._json = {}
 
@@ -71,8 +71,6 @@ class PageReader (object):
         except:
             return 404
 
-
-
     def get_favico (self):
         try:
             domain = self.url_domain
@@ -98,8 +96,6 @@ class PageReader (object):
     def get_body (self,article):
         article_body    = []
         article_paragraphs = article.find_all('p')
-        capitalized_char = ''
-        p_index = 0
         for paragraph in article_paragraphs:
             if paragraph.find("img"):
                 try: img_uri = paragraph.find('img')['src']
@@ -116,25 +112,59 @@ class PageReader (object):
 
                 if (img_size[0] + img_size[1]) > 100:
                     article_body.append({
-                        'content':img_uri,
                         'is_img':True,
+                        'content':img_uri,
                         'resolution':{
                                 'width':img_size[0],
                                 'height':img_size[1]
                     }})
                 else: pass
             else:
-                if not paragraph.text in ['Advertisement','Supported by']:
-                    if p_index == 0 and paragraph.text:
-                        if len(str(paragraph.text)) > 0:
-                            capitalized_char = str(paragraph.text)[0]
-                        
-                        article_body.append({'content':paragraph.text[1:],'is_img':False})
-                    else:
-                        article_body.append({'content':paragraph.text,'is_img':False})
-                    p_index += 1
+                ptext = paragraph.text
+                if not ptext in ['Advertisement','Supported by','ads','ad','anúncio']:
+                    props = []
 
-        return {'data':article_body, 'capital':capitalized_char}
+                    strongs = paragraph.find_all("strong")
+                    links = paragraph.find_all("a")
+
+                    if strongs:
+                        for s in strongs:
+                            text = str(s.text)
+                            steps = len(text)
+                            startindex = str(ptext).find(str(text))
+                            tag_type = 'strong'
+
+                            props.append({
+                                'start':startindex,
+                                'steps':steps,
+                                'type':tag_type,
+                                'text':text
+                            })
+                    if links:
+                        for a in links:
+                            text = str(a.text)
+                            steps = len(text)
+                            startindex = str(ptext).find(str(text))
+                            tag_type = 'link'
+
+                            props.append({
+                                'start':startindex,
+                                'steps':steps,
+                                'type':tag_type,
+                                'text':text,
+                                'href': a['href'] if a.has_attr('href') else ''
+                            })
+
+                    article_body.append(
+                        {
+                            'is_img':False,
+                            'content':ptext,
+                            'props':props
+                        }
+                    )
+
+
+        return {'capital':"",'data':article_body}
 
     @property
     def dump_json (self):
@@ -149,15 +179,15 @@ class PageReader (object):
             
         full_json = {
             'code' : 200,
+            'original_post'       : str(self.url),
+            'site_name'           : site_name,
+            'site_favicon'        : self.get_favico(),
+            'keywords'            : self.get_keywords(self.page, "article:tag"),
             'article_title'       : self.get_meta(self.page,"og:title","content"),
             'article_description' : self.get_meta(self.page, "og:description", 'content'),
             'article_image'       : self.get_meta(self.page, "og:image", 'content'),
             'article_capitalize'  : article_data.pop('capital', ''),
             'article_body'        : article_data.pop('data',''),
-            'site_name'           : site_name,
-            'site_favicon'        : self.get_favico(),
-            'keywords'            : self.get_keywords(self.page, "article:tag"),
-            'original_post'       : str(self.url),
         }
 
         self._json = json.dumps(full_json,ensure_ascii=False)
