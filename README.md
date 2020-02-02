@@ -1,6 +1,6 @@
 # Simplify API!
 
-This repository has all the code needed to communicate with 'Simplify APP' as  React-native application. this server provides an API used to scrap and selected URL and return all the content as JSON.
+This repository has all the code needed to communicate with <a href="https://github.com/zisongbr/SimplifyJournal_APP">'Simplify Journal'</a> react-native application. this server provides an API used to scrap and selected URL and return all the content as JSON.
 
 <br>
 
