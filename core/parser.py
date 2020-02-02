@@ -164,7 +164,7 @@ class PageParser (object):
                     )
 
 
-        return {'capital':"",'data':article_body}
+        return {'data':article_body}
 
     @property
     def dump_json (self):
@@ -186,7 +186,6 @@ class PageParser (object):
             'article_title'       : self.get_meta(self.page,"og:title","content"),
             'article_description' : self.get_meta(self.page, "og:description", 'content'),
             'article_image'       : self.get_meta(self.page, "og:image", 'content'),
-            'article_capitalize'  : article_data.pop('capital', ''),
             'article_body'        : article_data.pop('data',''),
         }
 

@@ -37,14 +37,15 @@ def try_get_article (url):
 
     return json
 
-@app.route("/get_article",methods=['GET','POST'])
+@app.route("/parser/json",methods=['GET','POST'])
 def json_summary():
     try:
         headers = request.headers
         _url = headers['article-url']
         json = try_get_article(_url)
         return json
-    except KeyError as r: return jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
+    except KeyError  as r: return jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
+    except Exception as r: return jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
 
 
 @app.route("/")
