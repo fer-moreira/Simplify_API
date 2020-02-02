@@ -1,52 +1,46 @@
 {
     "code": 200,
-    "article_title": "Focos de queimadas na Amazônia crescem 30% em 2019",
-    "article_description": "Inpe registrou 89.178 incêndios na floresta, maior número desde 2017; agosto, pior mês do ano, teve mais de 30 mil focos ativos de fogo",
-    "article_image": "https://ogimg.infoglobo.com.br/in/23920147-251-1b7/FT1086A/652/amazonia.jpg",
-    "article_capitalize": "R",
+    "original_post": "https://www.theguardian.com/australia-news/2020/feb/01/terror-on-all-sides-inside-a-firestorm-tearing-through-the-australian-bush",
+    "site_name": "the Guardian",
+    "site_favicon": "https://www.theguardian.com/favicon.ico",
+    "keywords": [
+        "Bushfires",
+        "Australia news",
+        "Canberra",
+        "Australian Capital Territory",
+        "Natural disasters and extreme weather",
+        "Wildfires",
+        "Rural Australia"
+    ],
+    "article_title": "Terror on all sides: inside a firestorm tearing through the Australian bush",
+    "article_description": "Guardian Australia reporter Christopher Knaus and photographer Mike Bowers join the Cowie family defending their property about 100km from Canberra",
+    "article_image": "https://i.guim.co.uk/img/media/56645af3dd7c0bb29859b1a19da74078bf7d80fb/0_92_4530_2718/master/4530.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dc429d1cd1d93e8207839b6de3c963a6",
+    "article_capitalize": "",
     "article_body": [
         {
-            "content": "IO — O número de focos de fogo na Amazônia cresceu 30% em 2019 em relação ao ano anterior, segundo dados compilados pelo Instituto Nacional de Pesquisas Espaciais (Inpe). Ao todo, foram 89.178 incêndios detectados pelo satélite de 1º de janeiro a 31 de dezembro do ano passado. É o maior número desde 2017, que registrou 107.439 focos.",
             "is_img": false,
-            "props" : [
+            "content": "Guardian Australia reporter Christopher Knaus and photographer Mike Bowers join the Cowie family defending their property about 100km from Canberra ",
+            "props": []
+        },
+        {
+            "is_img": false,
+            "content": "Bushfires menace homes and lives – and firefighters warn winds will create new threats • Thomas Keneally: ‘These fires have changed us’",
+            "props": [
                 {
-                    "start": 27,
-                    "steps": 4,
+                    "start": 0,
+                    "steps": 88,
                     "type": "strong",
-                    "content": "fogo"
+                    "text": "Bushfires menace homes and lives – and firefighters warn winds will create new threats"
                 },
                 {
-                    "start": 165,
-                    "steps": 4,
+                    "start": 89,
+                    "steps": 48,
                     "type": "link",
-                    "content": "Inpe",
-                    "href": "https://oglobo.globo.com/sociedade/ciencia/meio-ambiente/fala-de-salles-pode-ser-sinal-verde-para-desmatadores-diz-ex-diretor-do-inpe-24088939"
+                    "text": "• Thomas Keneally: ‘These fires have changed us’",
+                    "href": "https://www.theguardian.com/australia-news/2020/feb/01/thomas-keneally-these-fires-have-changed-us"
                 }
             ]
         },
         {
-            "content": "https://d37iydjzbdkvr9.cloudfront.net/arquivos/2020/01/08/incendios-amazonia-desk.png",
-            "is_img": true,
-            "resolution": {
-                "width": 1240,
-                "height": 2036
-            }
-        },
-    ],
-    "site_name": "O Globo",
-    "site_favicon": "https://oglobo.globo.com/apple-touch-icon.png",
-    "keywords": [
-        "Sociedade",
-        "queimadas;amazonia",
-        "fogo",
-        "Amazonia",
-        "Instituto Nacional de Pesquisas Espaciais",
-        "Inpe",
-        "Emmanuel Macron",
-        "dia do fogo",
-        "Ricardo Salles",
-        "Bolsonaro",
-        "Mourao"
-    ],
-    "original_post": "https://oglobo.globo.com/sociedade/focos-de-queimadas-na-amazonia-crescem-30-em-2019-1-24176803"
+    ]
 }
