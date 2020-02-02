@@ -1,10 +1,6 @@
 # Simplify API!
 
-This repository contains the code for 'Simplify Journal' backend.
-
-Base application for the 'Simplify Journal' react-native app, it is a flask app that does the whole process of getting the article, scrapping it all and returning a json
-
----
+This repository has all the code needed to communicate with 'Simplify APP' as  React-native application. this server provides an API used to scrap and selected URL and return all the content as JSON.
 
 <br>
 
@@ -15,6 +11,7 @@ Base application for the 'Simplify Journal' react-native app, it is a flask app 
     $ cd Simplify_API
     $ pip install -r requirements.txt
 
+<br>
 
 # Starting server
 
@@ -32,13 +29,27 @@ Base application for the 'Simplify Journal' react-native app, it is a flask app 
     $ python app.py run
     * Running on http://localhost:5000/ (Press CTRL+C to quit)
 
+</br>
 
-## Request JSON example
+# Create and deploy to Heroku
+
+    $ git clone https://github.com/zisongbr/Simplify_API.git
+    $ cd Simplify_API
+    $ git init | or fork
+    $ heroku apps:create example_name
+    
+    * Creating ⬢ example... done
+    * https://example.herokuapp.com/ | https://git.heroku.com/example.git
+    * Git remote heroku added
+
+
+</br>
+
+# Request JSON example
 
     import requests
-    import json
 
-    url = "http://127.0.0.1:5000/get_article"
+    url = "http://localhost:5000/get_article"
 
 
     headers = {
@@ -46,7 +57,7 @@ Base application for the 'Simplify Journal' react-native app, it is a flask app 
     }
 
     response = requests.request("GET", url, headers=headers)
-    print(response.text)
+    JSON = response.text
 
 <br>
 
