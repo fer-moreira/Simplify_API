@@ -43,13 +43,11 @@ This repository has all the code needed to communicate with <a href="https://git
     * Git remote heroku added
 
 
-</br>
-
 # Request JSON example
 
     import requests
 
-    url = "http://localhost:5000/get_article"
+    url = "http://localhost:5000/parser/json"
 
 
     headers = {
@@ -59,7 +57,6 @@ This repository has all the code needed to communicate with <a href="https://git
     response = requests.request("GET", url, headers=headers)
     JSON = response.text
 
-<br>
 
 # JSON:
 

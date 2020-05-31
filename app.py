@@ -1,5 +1,5 @@
 # FLASK
-from flask import Flask,request, render_template_string,render_template
+from flask import Flask,request, render_template_string,render_template, Response
 from core.parser import PageParser
 import sys, os, codecs
 import json as jsonparse
@@ -43,9 +43,14 @@ def json_summary():
         headers = request.headers
         _url = headers['article-url']
         json = try_get_article(_url)
-        return json
-    except KeyError  as r: return jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
-    except Exception as r: return jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
+        return Response(response=json,status=200, mimetype="application/json")
+
+    except KeyError  as r: 
+        err = jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
+        return Response(response=err,status=400, mimetype="application/json")
+    except Exception as r: 
+        err = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
+        return Response(response=err,status=505, mimetype="application/json")
 
 
 @app.route("/")
