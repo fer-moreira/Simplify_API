@@ -1,46 +1,101 @@
+
 {
     "code": 200,
-    "original_post": "https://www.theguardian.com/australia-news/2020/feb/01/terror-on-all-sides-inside-a-firestorm-tearing-through-the-australian-bush",
-    "site_name": "the Guardian",
-    "site_favicon": "https://www.theguardian.com/favicon.ico",
+    "original_post": "https://oglobo.globo.com/brasil/apos-ir-protesto-com-criticas-ao-stf-bolsonaro-diz-que-estara-onde-povo-estiver-1-24455623",
+    "site_name": "O Globo",
+    "site_favicon": "https://oglobo.globo.com/apple-touch-icon.png",
     "keywords": [
-        "Bushfires",
-        "Australia news",
-        "Canberra",
-        "Australian Capital Territory",
-        "Natural disasters and extreme weather",
-        "Wildfires",
-        "Rural Australia"
+        "Brasil",
+        "protesto",
+        "STF",
+        "Bolsonaro"
     ],
-    "article_title": "Terror on all sides: inside a firestorm tearing through the Australian bush",
-    "article_description": "Guardian Australia reporter Christopher Knaus and photographer Mike Bowers join the Cowie family defending their property about 100km from Canberra",
-    "article_image": "https://i.guim.co.uk/img/media/56645af3dd7c0bb29859b1a19da74078bf7d80fb/0_92_4530_2718/master/4530.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dc429d1cd1d93e8207839b6de3c963a6",
-    "article_capitalize": "",
+    "article_title": "Após ir a protesto com críticas ao STF, Bolsonaro diz que estará 'onde o povo estiver'",
+    "article_description": "Mais cedo, Bolsonaro cumprimentou manifestantes que exaltaram o governo e também pediram intervenção militar durante o ato",
+    "article_image": "https://ogimg.infoglobo.com.br/in/24455536-4af-ae7/FT1086A/652/WhatsApp-Image-2020-05-31-at-16.32.40-1.jpeg.jpg",
     "article_body": [
         {
             "is_img": false,
-            "content": "Guardian Australia reporter Christopher Knaus and photographer Mike Bowers join the Cowie family defending their property about 100km from Canberra ",
-            "props": []
-        },
-        {
-            "is_img": false,
-            "content": "Bushfires menace homes and lives – and firefighters warn winds will create new threats • Thomas Keneally: ‘These fires have changed us’",
+            "content": "BRASÍLIA- Depois de comparecer a um protesto com críticas ao Supremo Tribunal Federal (STF) e ao Congresso, em Brasília, o presidente Jair Bolsonaro postou em sua página no Twitter um vídeo de sua participação na manifestação e afirmou que estará \"onde o povo estiver\".",
             "props": [
                 {
-                    "start": 0,
-                    "steps": 88,
-                    "type": "strong",
-                    "text": "Bushfires menace homes and lives – and firefighters warn winds will create new threats"
-                },
-                {
-                    "start": 89,
-                    "steps": 48,
+                    "start": 36,
+                    "steps": 70,
                     "type": "link",
-                    "text": "• Thomas Keneally: ‘These fires have changed us’",
-                    "href": "https://www.theguardian.com/australia-news/2020/feb/01/thomas-keneally-these-fires-have-changed-us"
+                    "text": "protesto com críticas ao Supremo Tribunal Federal (STF) e ao Congresso",
+                    "href": "https://oglobo.globo.com/brasil/3046-bolsonaro-vai-ao-planalto-cumprimentar-manifestantes-que-criticam-stf-24455338"
                 }
             ]
         },
         {
+            "is_img": false,
+            "content": "Neste domingo, Bolsonaro sobrevoou de helicóptero o protesto a seu favor, cumprimentou manifestantes diante do Palácio do Planalto e montou em um cavalo da Polícia Militar para um \"passeio\" diante da sede da Presidência. O vídeo publicado por Bolsonaro no Twitter registrou esse momento.",
+            "props": [ ]
+        },
+        {
+            "is_img": false,
+            "content": "\"Estarei onde o povo estiver\", escreveu Bolsonaro.",
+            "props": [ ]
+        },
+        {
+            "is_img": false,
+            "content": "Nas ruas:Torcidas organizadas de clubes rivais saem às ruas em defesa da democracia em São Paulo, Minas e Rio",
+            "props": [
+                {
+                    "start": 0,
+                    "steps": 9,
+                    "type": "strong",
+                    "text": "Nas ruas:"
+                },
+                {
+                    "start": 9,
+                    "steps": 100,
+                    "type": "link",
+                    "text": "Torcidas organizadas de clubes rivais saem às ruas em defesa da democracia em São Paulo, Minas e Rio",
+                    "href": "https://oglobo.globo.com/brasil/torcidas-organizadas-de-clubes-rivais-saem-as-ruas-em-defesa-da-democracia-em-sao-paulo-minas-rio-24455430"
+                }
+            ]
+        },
+        {
+            "is_img": false,
+            "content": "A segurança do Congresso Nacional e do STF foi reforçada para evitar atos de depredação contra seus prédios.",
+            "props": [ ]
+        },
+        {
+            "is_img": false,
+            "content": "No protesto, manifestantes levavam faixas falando em \"censura\", na semana em que o ministro Alexandre de Moraes determinou busca e apreensão contra blogueiros bolsonaristas sob suspeita de disseminação de fake news e ataques aos ministros. Além disso, também houve pedidos de intervenção militar.",
+            "props": [ ]
+        },
+        {
+            "is_img": false,
+            "content": "Ao cumprimentar os apoiadores do governo, o presidente não utilizava máscara, desrespeitando decreto do Distrito Federal que obriga o uso de máscaras.",
+            "props": [ ]
+        },
+        {
+            "is_img": false,
+            "content": "Também neste domingo, houve manifestações em defesa da democracia em São Paulo, Minas Gerais e Rio de Janeiro. Os protestos foram convocados por torcedores de clubes de futebol como o Corinthians, Flamengo e Atlético Mineiro. Em São Paulo e no Rio, os atos foram dispersados pela polícia com bombas de gás lacrimogênio. ",
+            "props": [
+                {
+                    "start": 28,
+                    "steps": 81,
+                    "type": "link",
+                    "text": "manifestações em defesa da democracia em São Paulo, Minas Gerais e Rio de Janeiro",
+                    "href": "https://oglobo.globo.com/brasil/torcidas-organizadas-de-clubes-rivais-saem-as-ruas-em-defesa-da-democracia-em-sao-paulo-minas-rio-24455430"
+                },
+                {
+                    "start": 252,
+                    "steps": 66,
+                    "type": "link",
+                    "text": "atos foram dispersados pela polícia com bombas de gás lacrimogênio",
+                    "href": "https://oglobo.globo.com/brasil/manifestacoes-tem-confronto-entre-torcedores-bolsonaristas-policiais-em-sao-paulo-no-rio-24455456"
+                }
+            ]
+        },
+        {
+            "is_img": false,
+            "content": "\nOs comentários são de responsabilidade exclusiva de seus autores e não\nrepresentam a opinião deste site. Se achar algo que viole os termos de\nuso, denuncie. Leia as perguntas mais frequentes para saber o que é\nimpróprio ou ilegal\n",
+            "props": [ ]
+        }
     ]
+
 }

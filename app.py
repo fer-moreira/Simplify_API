@@ -1,17 +1,18 @@
 # FLASK
 from flask import Flask,request, render_template_string,render_template, Response
+from flask_cors import CORS, cross_origin
+
+# EXCEPTIONS
+from requests.exceptions import SSLError, ConnectionError, MissingSchema
+
+# SYSTEM
 from core.parser import PageParser
 import sys, os, codecs
 import json as jsonparse
-from flask_cors import CORS, cross_origin
-
-from requests.exceptions import SSLError, ConnectionError, MissingSchema
 
 app = Flask(__name__,template_folder='template')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
-
 
 def try_get_article (url):
     """Try requests selected url and dump its content in json
@@ -30,11 +31,11 @@ def try_get_article (url):
 
     except SSLError:        json = jsonparse.dumps({"error":{"code":400,"text":"Article not found"}})
     except AttributeError:  json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
-    except ConnectionError: json = jsonparse.dumps({"error":{'code':404,'text':'Failed to make connection, URL not exists'}})
+    except ConnectionError: json = jsonparse.dumps({"error":{'code':404,'text':'Failed to make connection, not connect or url doesnt exists'}})
     except MissingSchema:   json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
     except TypeError:       json = jsonparse.dumps({"error":{'code':404,'text':'Misspell URL'}})
     except Exception as r:  json = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
-
+    
     return json
 
 @app.route("/parser/json",methods=['GET','POST'])
@@ -44,14 +45,12 @@ def json_summary():
         _url = headers['article-url']
         json = try_get_article(_url)
         return Response(response=json,status=200, mimetype="application/json")
-
     except KeyError  as r: 
         err = jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
         return Response(response=err,status=400, mimetype="application/json")
     except Exception as r: 
         err = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
         return Response(response=err,status=505, mimetype="application/json")
-
 
 @app.route("/")
 def admin_page ():
