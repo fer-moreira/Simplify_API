@@ -1,101 +1,132 @@
-
 {
     "code": 200,
-    "original_post": "https://oglobo.globo.com/brasil/apos-ir-protesto-com-criticas-ao-stf-bolsonaro-diz-que-estara-onde-povo-estiver-1-24455623",
+    "original_post": "https://oglobo.globo.com/cultura/antonio-pitanga-vibra-com-casa-de-antiguidades-em-cannes-me-sinto-uma-crianca-dancando-dentro-de-mim-mesmo-24460853",
     "site_name": "O Globo",
-    "site_favicon": "https://oglobo.globo.com/apple-touch-icon.png",
+    "site_favicon": "https://www.google.com/s2/favicons?domain=oglobo.globo.com",
     "keywords": [
-        "Brasil",
-        "protesto",
-        "STF",
-        "Bolsonaro"
+    "Cultura"
     ],
-    "article_title": "Após ir a protesto com críticas ao STF, Bolsonaro diz que estará 'onde o povo estiver'",
-    "article_description": "Mais cedo, Bolsonaro cumprimentou manifestantes que exaltaram o governo e também pediram intervenção militar durante o ato",
-    "article_image": "https://ogimg.infoglobo.com.br/in/24455536-4af-ae7/FT1086A/652/WhatsApp-Image-2020-05-31-at-16.32.40-1.jpeg.jpg",
+    "article_pubdate": "2020-06-3T19:08",
+    "article_title": "Antônio Pitanga vibra com 'Casa de Antiguidades' em Cannes: 'Me sinto uma criança dançando dentro de mim mesmo'",
+    "article_description": "Ator de 80 anos também integrou o elenco de 'O pagador de promessas' (1962), único filme sul-americano a conquistar a Palma de Ouro do festival francês",
+    "article_image": "https://ogimg.infoglobo.com.br/in/24461024-e78-9e8/FT1086A/652/Casa_de_Antiguidades_CEC_0347_Antonio-Pitanga.jpg",
     "article_body": [
-        {
-            "is_img": false,
-            "content": "BRASÍLIA- Depois de comparecer a um protesto com críticas ao Supremo Tribunal Federal (STF) e ao Congresso, em Brasília, o presidente Jair Bolsonaro postou em sua página no Twitter um vídeo de sua participação na manifestação e afirmou que estará \"onde o povo estiver\".",
-            "props": [
-                {
-                    "start": 36,
-                    "steps": 70,
-                    "type": "link",
-                    "text": "protesto com críticas ao Supremo Tribunal Federal (STF) e ao Congresso",
-                    "href": "https://oglobo.globo.com/brasil/3046-bolsonaro-vai-ao-planalto-cumprimentar-manifestantes-que-criticam-stf-24455338"
-                }
-            ]
-        },
-        {
-            "is_img": false,
-            "content": "Neste domingo, Bolsonaro sobrevoou de helicóptero o protesto a seu favor, cumprimentou manifestantes diante do Palácio do Planalto e montou em um cavalo da Polícia Militar para um \"passeio\" diante da sede da Presidência. O vídeo publicado por Bolsonaro no Twitter registrou esse momento.",
-            "props": [ ]
-        },
-        {
-            "is_img": false,
-            "content": "\"Estarei onde o povo estiver\", escreveu Bolsonaro.",
-            "props": [ ]
-        },
-        {
-            "is_img": false,
-            "content": "Nas ruas:Torcidas organizadas de clubes rivais saem às ruas em defesa da democracia em São Paulo, Minas e Rio",
-            "props": [
-                {
-                    "start": 0,
-                    "steps": 9,
-                    "type": "strong",
-                    "text": "Nas ruas:"
-                },
-                {
-                    "start": 9,
-                    "steps": 100,
-                    "type": "link",
-                    "text": "Torcidas organizadas de clubes rivais saem às ruas em defesa da democracia em São Paulo, Minas e Rio",
-                    "href": "https://oglobo.globo.com/brasil/torcidas-organizadas-de-clubes-rivais-saem-as-ruas-em-defesa-da-democracia-em-sao-paulo-minas-rio-24455430"
-                }
-            ]
-        },
-        {
-            "is_img": false,
-            "content": "A segurança do Congresso Nacional e do STF foi reforçada para evitar atos de depredação contra seus prédios.",
-            "props": [ ]
-        },
-        {
-            "is_img": false,
-            "content": "No protesto, manifestantes levavam faixas falando em \"censura\", na semana em que o ministro Alexandre de Moraes determinou busca e apreensão contra blogueiros bolsonaristas sob suspeita de disseminação de fake news e ataques aos ministros. Além disso, também houve pedidos de intervenção militar.",
-            "props": [ ]
-        },
-        {
-            "is_img": false,
-            "content": "Ao cumprimentar os apoiadores do governo, o presidente não utilizava máscara, desrespeitando decreto do Distrito Federal que obriga o uso de máscaras.",
-            "props": [ ]
-        },
-        {
-            "is_img": false,
-            "content": "Também neste domingo, houve manifestações em defesa da democracia em São Paulo, Minas Gerais e Rio de Janeiro. Os protestos foram convocados por torcedores de clubes de futebol como o Corinthians, Flamengo e Atlético Mineiro. Em São Paulo e no Rio, os atos foram dispersados pela polícia com bombas de gás lacrimogênio. ",
-            "props": [
-                {
-                    "start": 28,
-                    "steps": 81,
-                    "type": "link",
-                    "text": "manifestações em defesa da democracia em São Paulo, Minas Gerais e Rio de Janeiro",
-                    "href": "https://oglobo.globo.com/brasil/torcidas-organizadas-de-clubes-rivais-saem-as-ruas-em-defesa-da-democracia-em-sao-paulo-minas-rio-24455430"
-                },
-                {
-                    "start": 252,
-                    "steps": 66,
-                    "type": "link",
-                    "text": "atos foram dispersados pela polícia com bombas de gás lacrimogênio",
-                    "href": "https://oglobo.globo.com/brasil/manifestacoes-tem-confronto-entre-torcedores-bolsonaristas-policiais-em-sao-paulo-no-rio-24455456"
-                }
-            ]
-        },
-        {
-            "is_img": false,
-            "content": "\nOs comentários são de responsabilidade exclusiva de seus autores e não\nrepresentam a opinião deste site. Se achar algo que viole os termos de\nuso, denuncie. Leia as perguntas mais frequentes para saber o que é\nimpróprio ou ilegal\n",
-            "props": [ ]
-        }
+    {
+    "is_img": true,
+    "content": "https://ogimg.infoglobo.com.br/in/24461024-e78-9e8/FT1086A/652/xCasa_de_Antiguidades_CEC_0347_Antonio-Pitanga.jpg.pagespeed.ic.YImkIWOIFI.jpg",
+    "alt": "Antônio Pitanga em cena do filme \"Casa de Antiguidades\", de João Paulo Miranda Foto: Carlos Eduardo Carvalho / Divulgação"
+    },
+    {
+    "is_img": false,
+    "content": "Antônio Pitanga recebeu uma grata ligação no início da tarde desta quarta-feira: \"Conseguimos! Estamos dentro!\". A voz do outro lado do telefone era de João Paulo Miranda, diretor de \"Casa de Antiguidades\". Protagonizado pelo ator de 80 anos, o filme, que tem previsão de estreia ainda para este ano no Brasil, foi escolhido pelo Festival de Cannes para compor a seleção oficial do evento. ",
+    "props": [
+    {
+    "start": 311,
+    "steps": 77,
+    "type": "link",
+    "text": "foi escolhido pelo Festival de Cannes para compor a seleção oficial do evento",
+    "href": "https://oglobo.globo.com/cultura/com-brasileiro-na-lista-festival-de-cannes-anuncia-selecao-oficial-deste-ano-com-56-filmes-24460563"
+    }
     ]
-
-}
+    },
+    {
+    "is_img": false,
+    "content": "O longa entra no rol dos títulos que seriam exibidos no festival, cancelado este ano por conta da pandemia, e têm o direito de usar o selo de aprovação da mostra de cinema. É o representante brasileiro em meio a 56 títulos, onde também estão longas de Spike Lee, Steve McQueen e Wes Anderson, entre outros diretores. ",
+    "props": [
+    {
+    "start": 66,
+    "steps": 40,
+    "type": "link",
+    "text": "cancelado este ano por conta da pandemia",
+    "href": "https://oglobo.globo.com/cultura/2274-cannes-cancela-edicao-do-festival-em-2020-24420952"
+    }
+    ]
+    },
+    {
+    "is_img": false,
+    "content": "Pitanga diz que recebeu a notícia feliz \"como uma criança\". Estava no meio de uma reunião, mas não se conteve. Comemorou o feito como se fosse a primeira vez. Não era. Ele também integrou o elenco de \"O pagador de promessas\" (1962), de Anselmo Duarte, único filme sul-americano a conquistar uma Palma de Ouro em toda a história do cobiçado festival francês. Com \"Casa de Antiguidades\", porém, o sentimento foi diferente.",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "— O João Paulo me ligou assim que soube, e eu balancei, foi uma emoção total. Sou emotivo, mesmo calejado. Em \"O pagador de promessas\" eu não era um dos protagonistas, mas todos nós fomos premiados com a Palma. Imagine, eu aos 80 anos, em pleno confinamento, receber uma notícia dessas. Eu me sinto uma criança dançando dentro de mim mesmo de tanta alegria. E só tenho a agradecer ao João Paulo que acreditou em mim, ele queria que fosse o Pitanga para viver esse personagem. Me sinto uma criança, numa boa — comemora o ator.",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "O personagem vivido por ele no filme é Cristovam, um homem do campo que se muda para a cidade em busca de melhores condições de vida. Lá, ele enfrenta solidão e preconceito.",
+    "props": []
+    },
+    {
+    "is_img": true,
+    "content": "https://ogimg.infoglobo.com.br/in/24461100-405-7d7/FT1086A/652/xCasa-de-Antiguidades_A103_1.4.3_Antonio-Pitanga.png.pagespeed.ic.HZxjsouqgE.jpg",
+    "alt": "\"Você só sabe que ele é negro quando ele tira o uniforme\", diz o ator sobre o personagem Cristovam Foto: Divulgação"
+    },
+    {
+    "is_img": false,
+    "content": " — O filme é muito, muito atual. Cristovam é um homem simples que trabalha na ordenha de vacas no interior de Goiânia, e vai trabalhar numa cidade colonizada pelos austríacos. Então lá, pela cultura do local, a raça negra é invisivel. Acontece muito no Brasil. Esse homem do campo é marginalizado de uma maneira terrível. Ele luta como um bom profissional, veste todo um uniforme de astronauta para trabalhar na fábrica de lacticínios, e você só sabe que ele é negro quando ele tira o uniforme. É incrivel. Como ele não é computado como ser humano, sofre uma solidão. São embates de culturas. Ele não se adapta, não é aceito, e também não entende essa agressão, esse contexto. Ele trabalha, produz, leva comida às grandes mansões e, na verdade, ele não tem quase nada. Ganha um salario de miséria. É um retratao de milhares e milhares de brasileiros — descreve.",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "Enredo \"fresquinho\", Pitanga ressalta, com a sagacidade de quem não desgruda do noticiário. Ele tem acompanhado pela televisão os protestos diários nos Estados Unidos ocorridos a partir da morte de George Floyd, homem negro que morreu com o pescoço asfixiado sob o joelho de um policial branco. A luta pela igualdade racial, diz o próprio ator, o aflora, o deixa vivo.",
+    "props": [
+    {
+    "start": 189,
+    "steps": 21,
+    "type": "link",
+    "text": "morte de George Floyd",
+    "href": "https://oglobo.globo.com/mundo/2273-homem-negro-morre-apos-ser-sufocado-por-policial-nos-eua-caso-gera-protestos-24448825"
+    }
+    ]
+    },
+    {
+    "is_img": false,
+    "content": "— Vejo tudo, até de madrugada, todo esse movimento que o povo está fazendo. Aí você percebe a grandiosidade da força do povo. Porque não é só o protesto dos negros, é dos brancos, hispânicos, todas as raças. Estão nas ruas contra a violência. É o grito do assalariado, do desempregado, o grito contra o racismo. Está em todos os lugares. Eu tenho 80 anos, eu vivi vários movimentos, vi Martin Luther King, Malcom X, Patrice Lumumba. O \"Barravento\" (filme de Glauber Rocha de 1962) estava conectado com isso, e hoje parece que estou fazendo um novo \"Barravento\". Parece que começamos a filmar nesta semana, tal frescor. Não são os Estados Unidos, é o mundo. No Brasil, temos um preconceito arraigado. Temos um presidente homofóbico, racista, que é contra índio. Todos os tipos de direitos que conseguimos, ele está rasgando — diz Pitanga.",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "Ele ainda estenda suas críticas ao presidente da Fundação Palmares, Sérgio Camargo, que se referiu ao movimentos negro como \"escória maldita\":",
+    "props": [
+    {
+    "start": 84,
+    "steps": 57,
+    "type": "link",
+    "text": "que se referiu ao movimentos negro como \"escória maldita\"",
+    "href": "https://oglobo.globo.com/brasil/em-audio-de-reuniao-presidente-da-fundacao-palmares-se-refere-ao-movimento-negro-como-escoria-maldita-24459484"
+    }
+    ]
+    },
+    {
+    "is_img": false,
+    "content": "— Esse cara não existe. Eu tenho pena da mãe, do pai, da família dele. Esse cara é um veneno, ele é a escória, é a decepção, a vergonha da raça negra.",
+    "props": []
+    },
+    {
+    "is_img": true,
+    "content": "https://ogimg.infoglobo.com.br/in/24461091-5fc-36d/FT1086A/652/x86012854.jpg.pagespeed.ic._XCWAIfAmw.jpg",
+    "alt": "Pitanga na peça \"Embarque imediato\", que teve de ser interrompida por conta da pandemia do novo coronavírus Foto: Leto Carvalho / Divulgação"
+    },
+    {
+    "is_img": false,
+    "content": " Prestes a completar 81 anos (ele comemora no dia 13 deste mês), o ator garante que ainda tem muita lenha para queimar. Por conta do coronavírus, teve seu trabalho interrompido na peça \"O embarque imediato\", que estava em cartaz em São Paulo, com direção de Marcio Meirelles e dramaturgia de Aldri Anunciação. ",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "Contracenando com seu filho, Rocco, ele dá vida a um senhor africano retido em uma sala alfandegária de um aeroporto. \"Ia correr o país, mas tivemos que parar\", lamenta. Para \"quando a pandemia passar\", outro projeto o empolga. Ele vai dirigir \"Malês\", um filme sobre o histórico levante de escravos ocorrido em Salvador, em 1835.",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "— Já temos um elenco com Camila Pitanga, Seu Jorge, Lázaro Ramos, Rocco Pitanga, Taís Araújo, Chico Diaz, Patrícia Pillar... Espero que eu possa alinhar a agenda desse pessoal depois da pandemia, mas já está tudo certo. Vamos começar a filmar em Maricá, depois vamos para Salvador, onde será filmado 80% do projeto — conta.",
+    "props": []
+    },
+    {
+    "is_img": false,
+    "content": "\nOs comentários são de responsabilidade exclusiva de seus autores e não\nrepresentam a opinião deste site. Se achar algo que viole os termos de\nuso, denuncie. Leia as perguntas mais frequentes para saber o que é\nimpróprio ou ilegal\n",
+    "props": []
+    }
+    ]
+    }

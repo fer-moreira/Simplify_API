@@ -7,8 +7,8 @@ from requests.exceptions import ConnectionError
 
 import codecs, sys, bs4, json
 
-from PIL import Image
-from io import BytesIO,StringIO
+from datetime import datetime
+from dateutil import parser
 
 class PageParser (object):
     def __init__ (self):
@@ -52,26 +52,12 @@ class PageParser (object):
             element = ""
 
 
+        if element != "":
+            d = parser.parse(str(element))
+            element = str(datetime.strftime(d, "%h %d %Y - %H:%M"))
+
         return element
-
-    def get_keywords (self,soup,property):
-        try:
-            keywords = []
-            if soup.find_all("meta",property=property):
-                elements = soup.find_all("meta", property=property)
-
-                for e in elements:
-                    keyvalue = e['content']
-                    keys = str(keyvalue).replace(";",",").split(",")
-                    keywords += keys
-
-
-                return keywords
-            else:
-                return []
-        except TypeError:
-            return []
-            
+     
     @property
     def url_domain (self):
         try: return urlparse(self.url).netloc
@@ -119,7 +105,7 @@ class PageParser (object):
                             })
             else:
                 ptext = paragraph.text
-                if not ptext in ['Advertisement','Supported by','ads','ad','anúncio']:
+                if not ptext in ['Advertisement','Supported by','ads','ad','anúncio', 'transcript']:
                     props = []
 
                     strongs = paragraph.find_all("strong")
@@ -180,7 +166,6 @@ class PageParser (object):
             'original_post'       : str(self.url),
             'site_name'           : site_name,
             'site_favicon'        : self.get_favico(),
-            'keywords'            : self.get_keywords(self.page, "article:tag"),
             "article_pubdate"     : self.get_pubdate(self.page),
             'article_title'       : self.get_meta(self.page,"og:title","content"),
             'article_description' : self.get_meta(self.page, "og:description", 'content'),

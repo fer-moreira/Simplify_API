@@ -29,6 +29,9 @@ def try_get_article (url):
         reader.url = url
         json = reader.dump_json
 
+        # fj = open(r"./template/dump.json","r").read()
+        # json = fj
+
     except SSLError as r:        json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
     except AttributeError as r:  json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
     except ConnectionError as r: json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
@@ -44,7 +47,7 @@ def json_summary():
         headers = request.headers
         _url = headers['article-url']
         json = try_get_article(_url)
-        return Response(response=json,status=200, mimetype="application/json")
+        return Response(response=json, status=200, mimetype="application/json")
     except KeyError  as r: 
         err = jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
         return Response(response=err,status=400, mimetype="application/json")
