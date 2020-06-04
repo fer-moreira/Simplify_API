@@ -29,12 +29,12 @@ def try_get_article (url):
         reader.url = url
         json = reader.dump_json
 
-    except SSLError:        json = jsonparse.dumps({"error":{"code":400,"text":"Article not found"}})
-    except AttributeError:  json = jsonparse.dumps({"error":{'code':400,'text':'Something in article is missing'}})
-    except ConnectionError: json = jsonparse.dumps({"error":{'code':404,'text':'Failed to make connection, not connect or url doesnt exists'}})
-    except MissingSchema:   json = jsonparse.dumps({"error":{'code':404,'text':'Not valid URL'}})
-    except TypeError:       json = jsonparse.dumps({"error":{'code':404,'text':'Misspell URL'}})
-    except Exception as r:  json = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
+    except SSLError as r:        json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
+    except AttributeError as r:  json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
+    except ConnectionError as r: json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
+    except MissingSchema as r:   json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
+    except TypeError as r:       json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
+    except Exception as r:       json = jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}})
     
     return json
 

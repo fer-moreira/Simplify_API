@@ -38,6 +38,21 @@ class PageParser (object):
             return element[param]
         else:
             return ""
+    
+    def get_pubdate (self, soup):
+        if soup.find("meta", property="article:published_time"):
+            element = soup.find("meta", property="article:published_time")["content"]
+        elif soup.find("meta", property="bt:pubDate"):
+            element = soup.find("meta", property="bt:pubDate")["content"]
+        elif soup.find("meta", property="DC.date.issued"):
+            element = soup.find("meta", property="DC.date.issued")["content"]
+        elif soup.find("meta", property="pubdate"):
+            element = soup.find("meta", property="pubdate")["content"]
+        else:
+            element = ""
+
+
+        return element
 
     def get_keywords (self,soup,property):
         try:
@@ -47,8 +62,9 @@ class PageParser (object):
 
                 for e in elements:
                     keyvalue = e['content']
-                    keys = str(keyvalue).split(',')
+                    keys = str(keyvalue).replace(";",",").split(",")
                     keywords += keys
+
 
                 return keywords
             else:
@@ -56,7 +72,6 @@ class PageParser (object):
         except TypeError:
             return []
             
-
     @property
     def url_domain (self):
         try: return urlparse(self.url).netloc
@@ -74,51 +89,34 @@ class PageParser (object):
     def get_favico (self):
         try:
             domain = self.url_domain
-            high_res_favico = "https://{0}/apple-touch-icon.png".format(domain)
-            low_res_favico = "https://{0}/favicon.ico".format(domain)
-
-
-            if self.try_request(high_res_favico) == 200:
-                favico_uri = high_res_favico
-            elif self.try_request(low_res_favico) == 200:
-                favico_uri = low_res_favico
-            else:
-                favico_uri = self.page.find("link", rel="shortcut icon")['href']
-
+            favico_uri = "https://www.google.com/s2/favicons?domain={0}".format(domain)
             return favico_uri
         except:
-            favico_uri = self.page.find("link", rel="shortcut icon")['href']          
-            return favico_uri if self.url_domain in favico_uri else "{0}{1}".format(self.url_domain,favico_uri)
+            favico_uri = "https://www.google.com/s2/favicons?domain={0}".format("google.com")
+            return favico_uri
 
             
 
     # THIS FUNCTION PARSE THE ARTICLE FROM HTML TO A PYTHON DICT
     def get_body (self,article):
         article_body    = []
-        article_paragraphs = article.find_all('p')
+        article_paragraphs = article.find_all(['p','figure'])
         for paragraph in article_paragraphs:
             if paragraph.find("img"):
-                try: img_uri = paragraph.find('img')['src']
-                except KeyError: pass
-                
-                try:
-                    req = requests.get(img_uri)
-                    info = Image.open(BytesIO(req.content))
-                    size = info.size
-                    info.close()
-                    img_size = size
-                except:
-                    img_size = [0,0]
+                img_uri = paragraph.find('img')
+                wanted_classes = ['src', 'data-src']
 
-                if (img_size[0] + img_size[1]) > 100:
-                    article_body.append({
-                        'is_img':True,
-                        'content':img_uri,
-                        'resolution':{
-                                'width':img_size[0],
-                                'height':img_size[1]
-                    }})
-                else: pass
+                if img_uri:
+                    classes_list = list(img_uri.attrs.keys())
+                    have_wanted = [x in classes_list for x in wanted_classes]
+                    
+                    for id, value in enumerate(have_wanted):
+                        if value:
+                            article_body.append({
+                                'is_img' : True,
+                                'content' : str(img_uri.attrs[wanted_classes[id]]),
+                                "alt": str(img_uri.attrs.get('alt'))
+                            })
             else:
                 ptext = paragraph.text
                 if not ptext in ['Advertisement','Supported by','ads','ad','anúncio']:
@@ -183,6 +181,7 @@ class PageParser (object):
             'site_name'           : site_name,
             'site_favicon'        : self.get_favico(),
             'keywords'            : self.get_keywords(self.page, "article:tag"),
+            "article_pubdate"     : self.get_pubdate(self.page),
             'article_title'       : self.get_meta(self.page,"og:title","content"),
             'article_description' : self.get_meta(self.page, "og:description", 'content'),
             'article_image'       : self.get_meta(self.page, "og:image", 'content'),
