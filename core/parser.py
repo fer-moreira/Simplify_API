@@ -98,11 +98,17 @@ class PageParser (object):
                     
                     for id, value in enumerate(have_wanted):
                         if value:
-                            article_body.append({
-                                'is_img' : True,
-                                'content' : str(img_uri.attrs[wanted_classes[id]]),
-                                "alt": str(img_uri.attrs.get('alt'))
-                            })
+                            content = str(img_uri.attrs[wanted_classes[id]])
+
+                            if len(content) < 5:
+                                pass
+                            else:
+                                alt = str(img_uri.attrs.get('alt'))
+                                article_body.append({
+                                    'is_img' : True,
+                                    'content' : content,
+                                    "alt": alt
+                                })
             else:
                 ptext = paragraph.text
                 if not ptext in ['Advertisement','Supported by','ads','ad','anúncio', 'transcript']:
