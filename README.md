@@ -51,7 +51,7 @@ This repository has all the code needed to communicate with <a href="https://git
 
 
     headers = {
-        "article-url": "https://www.nytimes.com/2019/12/23/world/europe/russia-putin.html"
+        "REACT_APP_ARTICLE_URL": "https://www.nytimes.com/2019/12/23/world/europe/russia-putin.html"
     }
 
     response = requests.request("GET", url, headers=headers)
