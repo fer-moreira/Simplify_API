@@ -18,6 +18,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 PORT = int(os.environ.get("PORT", 5000))
 DEBUG = int(os.environ.get("DEBUG", 1))
+DEBUG_ENV = int(os.environ.get("DEBUG_ENV", 0))
 ENV = os.environ.get("ENV", "Development")
 MASTER_KEY = os.environ.get("MASTER_KEY", None)
 MASTER_USER = os.environ.get("MASTER_USER", None)
@@ -71,41 +72,59 @@ def json_summary():
         })
 
         if not auth.is_auth():
-            err = jsonparse.dumps({"error":{'code':403,'text':"forbidden","traceback":traceback.format_exc()}})
-            return Response(response=err,status=403, mimetype="application/json")
+            return Response(
+                response=jsonparse.dumps({"error":{'code':403,'text':"forbidden",}}),
+                status=403, 
+                mimetype="application/json"
+            )
         else:
             json = try_get_article(str(REACT_APP_ARTICLE_URL))
-            return Response(response=json, status=200, mimetype="application/json")
+            return Response(
+                response=json, 
+                status=200, 
+                mimetype="application/json"
+            )
 
     except KeyError  as r: 
-        err = jsonparse.dumps({"error":{"code":400,"text":"Missing headers",'log':r.args}})
-        return Response(response=err,status=400, mimetype="application/json")
+        return Response(
+            response=jsonparse.dumps({
+                "error":{
+                    "code":400,
+                    "text":"MISSING HEADERS",
+                    'log':r.args
+                }
+            }),
+            status=400, 
+            mimetype="application/json"
+        )
     except Exception as r: 
-        err = jsonparse.dumps({
-            "error":{
-                'code':505,
-                'text':r.__class__.__name__,
-                'log':r.args
-            }
-        })
-
-        return Response(response=err,status=505, mimetype="application/json")
+        return Response(
+            response=jsonparse.dumps({"error":{'code':505,'text':r.__class__.__name__,'log':r.args}}),
+            status=505,
+            mimetype="application/json"
+        )
 
 @app.route("/environment")
 def environment ():
-    json = jsonparse.dumps({
-        "environment" : ENV,
-        "port": PORT,
-        "debug":DEBUG,
-        "variables" : {
-            "MASTER_KEY":MASTER_KEY,
-            "MASTER_USER":MASTER_USER,
-            "MASTER_PASSWORD":MASTER_PASSWORD,
-            "MASTER_KEY":MASTER_KEY,
-        }
-    })
+    if DEBUG == 1 and DEBUG_ENV == 1:
+        json = jsonparse.dumps({
+            "environment" : ENV,
+            "port": PORT,
+            "debug":DEBUG,
+            "variables" : {
+                "MASTER_KEY":MASTER_KEY,
+                "MASTER_USER":MASTER_USER,
+                "MASTER_PASSWORD":MASTER_PASSWORD,
+                "MASTER_KEY":MASTER_KEY,
+            }
+        })
 
-    return Response(response=json,status=200, mimetype="application/json")
+        return Response(response=json,status=200, mimetype="application/json")
+    
+    return Response(
+        response=jsonparse.dumps({"error":{'code':403,'text':"FORBIDDEN"}}),
+        status=403, 
+        mimetype="application/json")
 
 
 if __name__ == "__main__":
