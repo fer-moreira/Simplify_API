@@ -16,13 +16,14 @@ app = Flask(__name__,template_folder='template')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-PORT = int(os.environ.get("PORT", 5000))
-DEBUG = int(os.environ.get("DEBUG", 1))
-DEBUG_ENV = int(os.environ.get("DEBUG_ENV", 0))
-ENV = os.environ.get("ENV", "Development")
-MASTER_KEY = os.environ.get("MASTER_KEY", None)
-MASTER_USER = os.environ.get("MASTER_USER", None)
+
+PORT            = int(os.environ.get("PORT", 5000))
+DEBUG           = int(os.environ.get("DEBUG", 1))
+FLASK_ENV       = os.environ.get("FLASK_ENV", "Unset")
+MASTER_KEY      = os.environ.get("MASTER_KEY", None)
+MASTER_USER     = os.environ.get("MASTER_USER", None)
 MASTER_PASSWORD = os.environ.get("MASTER_PASSWORD", None)
+
 
 def try_get_article (url):
     """Try requests selected url and dump its content in json
@@ -106,16 +107,34 @@ def json_summary():
 
 @app.route("/environment")
 def environment ():
-    if DEBUG == 1 and DEBUG_ENV == 1:
+    if DEBUG == 1:
         json = jsonparse.dumps({
-            "environment" : ENV,
+            "code": 200,
+            "environment" : FLASK_ENV,
             "port": PORT,
-            "debug":DEBUG,
+            "debug": DEBUG,
             "variables" : {
                 "MASTER_KEY":MASTER_KEY,
                 "MASTER_USER":MASTER_USER,
                 "MASTER_PASSWORD":MASTER_PASSWORD,
                 "MASTER_KEY":MASTER_KEY,
+            },
+            "views": {
+                "/parser/json":{
+                    "HEADINGS": [
+                        "REACT_APP_ARTICLE_URL",
+                        "REACT_APP_PARSER_KEY",
+                        "REACT_APP_PARSER_USER",
+                        "REACT_APP_PARSER_PASSWORD",
+                        "REACT_APP_ARTICLE_URL"
+                    ]
+                },
+                "environment" : {
+                    "HEADINGS" : [
+                        "DEBUG"
+                    ]
+                }
+
             }
         })
 
@@ -128,4 +147,4 @@ def environment ():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    app.run(host='0.0.0.0', port=PORT, debug=DEBUG)
