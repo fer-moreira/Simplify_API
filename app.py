@@ -9,7 +9,7 @@ from requests.exceptions import SSLError, ConnectionError, MissingSchema
 from core.parser import PageParser
 from core.auth import Authentication
 
-import sys, os, codecs
+import sys, os, codecs, traceback
 import json as jsonparse
 
 app = Flask(__name__,template_folder='template')
@@ -17,7 +17,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 PORT = int(os.environ.get("PORT", 5000))
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = int(os.environ.get("DEBUG", 1))
 ENV = os.environ.get("ENV", "Development")
 MASTER_KEY = os.environ.get("MASTER_KEY", None)
 MASTER_USER = os.environ.get("MASTER_USER", None)
@@ -71,7 +71,7 @@ def json_summary():
         })
 
         if not auth.is_auth():
-            err = jsonparse.dumps({"error":{'code':403,'text':"forbidden"}})
+            err = jsonparse.dumps({"error":{'code':403,'text':"forbidden","traceback":traceback.format_exc()}})
             return Response(response=err,status=403, mimetype="application/json")
         else:
             json = try_get_article(str(REACT_APP_ARTICLE_URL))
