@@ -11,25 +11,9 @@ from datetime import datetime
 from dateutil import parser
 
 class PageParser (object):
-    def __init__ (self):
+    def __init__ (self, url):
         self._json = {}
-
-    @property
-    def scrap_soup (self):
-        try:
-            page = requests.get(self.url)
-            soup = BeautifulSoup(page.content, 'html.parser')
-            return soup
-        except ConnectionError: raise
-        except AttributeError: raise
-
-    @property
-    def url (self):
-        return self._url
-    
-    @url.setter
-    def url (self,value):
-        self._url = value
+        self.url = url
 
 
     def get_meta (self,soup,property,param):
@@ -77,6 +61,7 @@ class PageParser (object):
             domain = self.url_domain
             favico_uri = "https://www.google.com/s2/favicons?domain={0}".format(domain)
             return favico_uri
+        
         except:
             favico_uri = "https://www.google.com/s2/favicons?domain={0}".format("google.com")
             return favico_uri
@@ -156,9 +141,10 @@ class PageParser (object):
 
         return {'data':article_body}
 
-    @property
+    
     def dump_json (self):
-        self.page = self.scrap_soup
+        page = requests.get(self.url)
+        self.page = BeautifulSoup(page.content, 'html.parser')
         article = self.page.find('article')
 
         
@@ -179,6 +165,6 @@ class PageParser (object):
             'article_body'        : article_data.pop('data',''),
         }
 
-        self._json = json.dumps(full_json,ensure_ascii=False)
+        self._json = json.dumps(full_json, ensure_ascii=False)
 
         return self._json

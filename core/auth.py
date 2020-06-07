@@ -1,19 +1,44 @@
+import base64
+
+
 class Authentication (object):
-    def __init__ (self, MASTER, PAYLOAD):
-        self.KEY = PAYLOAD.get("REACT_APP_PARSER_KEY")
-        self.USER = PAYLOAD.get("REACT_APP_PARSER_USER")
-        self.PASSWORD = PAYLOAD.get("REACT_APP_PARSER_PASSWORD")
+    def __init__ (self, master_key, parser_credentials):
+        self.master_key = master_key
+        self.parser_credentials = parser_credentials
 
-        self.MASTER_KEY = MASTER.get("MASTER_KEY")
-        self.MASTER_USER = MASTER.get("MASTER_USER")
-        self.MASTER_PASSWORD = MASTER.get("MASTER_PASSWORD")
+    def encode(self, key, string):
+        encoded_chars = []
 
-    
-    def is_auth (self):
-        if self.KEY == self.MASTER_KEY \
-        and self.USER == self.MASTER_USER \
-        and self.PASSWORD == self.MASTER_PASSWORD:
+        for i in range(len(string)):
+            key_c = key[i % len(key)]
+            encoded_c = chr(ord(string[i]) + ord(key_c) % 256)
+            encoded_chars.append(encoded_c)
+
+        encoded_string = "".join(encoded_chars)
+        return encoded_string
+
+    def decode(self, key, string):
+        encoded_chars = []
+
+        for i in range(len(string)):
+            key_c = key[i % len(key)]
+            encoded_c = chr(ord(string[i]) - ord(key_c) % 256)
+            encoded_chars.append(encoded_c)
+
+        encoded_string = "".join(encoded_chars)
+        return encoded_string
+
+    def auth (self, app_credentials):
+        if app_credentials == self.parser_credentials:
             return True
         else:
             return False
-        
+
+    def is_auth (self, credentials):
+        decoded = self.decode(self.master_key, credentials)
+        data = decoded.split("__")
+        req_credential = {data[0]:data[1]}
+        is_auth = self.auth(req_credential)
+        return is_auth
+
+
