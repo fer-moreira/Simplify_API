@@ -12,7 +12,7 @@ from core.auth import Authentication
 import sys, os, codecs, traceback
 import json as jsonparse
 
-app = Flask(__name__,template_folder='template')
+app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -39,9 +39,6 @@ def try_get_article (url):
         reader = PageParser()
         reader.url = url
         json = reader.dump_json
-
-        # fj = open(r"./template/dump.json","r").read()
-        # json = fj
 
     except SSLError as r:        json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
     except AttributeError as r:  json = jsonparse.dumps({"error":{'code':404,'text': str(r)}})
